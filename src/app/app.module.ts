@@ -13,13 +13,21 @@ import { ErrorInterceptorProvider } from './services/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ListsComponent } from './lists/lists.component';
+import { MessagesComponent } from './messages/messages.component';
+import { MemberListComponent } from './member-list/member-list.component';
+import { RouterModule } from '@angular/router';
+import { appRoutes } from './routes';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    ListsComponent,
+    MessagesComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,
     }),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [
     ErrorInterceptorProvider
