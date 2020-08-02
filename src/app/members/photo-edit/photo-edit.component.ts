@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Photo } from 'src/app/_models/photo';
 import { FileUploader } from 'ng2-file-upload';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/_services/auth.service';
+import { UserService } from 'src/app/_services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-photo-edit',
@@ -11,11 +13,14 @@ import { AuthService } from 'src/app/_services/auth.service';
 })
 export class PhotoEditComponent implements OnInit {
   @Input() photos: Photo[];
+  @Output() getMemberPhotoChange = new EventEmitter<string>();
   uploader: FileUploader;
   hasBaseDropZoneOver = false;
   baseurl = environment.apiUrl;
+  currentMain: Photo;
 
-  constructor(private authService: AuthService){
+  constructor(private authService: AuthService, private userService: UserService,
+    private toastr: ToastrService){
   }
 
   ngOnInit() {
@@ -51,6 +56,17 @@ export class PhotoEditComponent implements OnInit {
 
       this.photos.push(photo);
     };
+  }
+
+  setMainPhoto(photo: Photo){
+    this.userService.setMainPhoto(this.authService.decodedToken.nameid, photo.id).subscribe(() => {
+      this.currentMain = this.photos.filter(p => p.isMain === true)[0];
+      this.currentMain.isMain = false;
+      photo.isMain = true;
+      this.getMemberPhotoChange.emit(photo.url);
+    }, err => {
+      this.toastr.error(err);
+    })
   }
 
 }
