@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from '@auth0/angular-jwt';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -55,7 +56,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     MemberCardComponent,
     MemberDetailComponent,
     MemberEditComponent,
-    PhotoEditComponent
+    PhotoEditComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
