@@ -1,7 +1,7 @@
 import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
 import { RouterModule } from '@angular/router';
@@ -31,7 +32,7 @@ import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
 import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter(){
-  console.log(localStorage.getItem('token'))
+  console.log(localStorage.getItem('token'));
   return localStorage.getItem('token');
 }
 
@@ -58,12 +59,15 @@ export class CustomHammerConfig extends HammerGestureConfig  {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxGalleryModule,
     FileUploadModule,
     TabsModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 5000,
