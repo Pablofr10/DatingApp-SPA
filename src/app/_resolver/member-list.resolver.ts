@@ -8,12 +8,15 @@ import { catchError } from 'rxjs/operators';
 import { error } from 'protractor';
 
 @Injectable()
-export class MemberListResolver implements Resolve<User[]>{
-  constructor(private userService: UserService,
-    private router: Router, private toaster: ToastrService){}
+export class MemberListResolver implements Resolve<User[]> {
+  pageNumer = 1;
+  pageSize = 5;
 
-    resolve(route: ActivatedRouteSnapshot): Observable<User[]>{
-      return this.userService.getUsers().pipe(
+  constructor(private userService: UserService,
+    private router: Router, private toaster: ToastrService) {}
+
+    resolve(route: ActivatedRouteSnapshot): Observable<User[]> {
+      return this.userService.getUsers(this.pageNumer, this.pageSize).pipe(
         catchError(error => {
           this.toaster.error('Problem retrieving data');
           this.router.navigate(['/home']);

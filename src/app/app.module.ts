@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 import { ToastrModule } from 'ngx-toastr';
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -33,7 +35,6 @@ import { PhotoEditComponent } from './members/photo-edit/photo-edit.component';
 import { FileUploadModule } from 'ng2-file-upload';
 
 export function tokenGetter(){
-  console.log(localStorage.getItem('token'));
   return localStorage.getItem('token');
 }
 
@@ -69,6 +70,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     NgxGalleryModule,
     FileUploadModule,
     TabsModule.forRoot(),
+    ButtonsModule.forRoot(),
+    PaginationModule.forRoot(),
     BsDatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
     ToastrModule.forRoot({
